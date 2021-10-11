@@ -13,11 +13,7 @@
       // Precompile CSS and use next_dev since running dev shell script from this directory fails.
       "preLaunchTask": "batteries-included:css:build-and-watch",
       "command": "yarn workspace batteries-included run next_dev",
-      "trace": true,
-      "webRoot": "${workspaceFolder}/src/js/packages/batteries-included",
-      "sourceMapPathOverrides": {
-        "webpack://_N_E/*": "${webRoot}/*"
-      }
+      "trace": true
     },
     {
       "name": "batteries-included: debug client-side",
