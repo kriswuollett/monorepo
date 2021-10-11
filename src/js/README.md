@@ -1,6 +1,14 @@
 # JavaScript / TypeScript
 
-## Project Initialization
+## Developer Setup
+
+1. Fetch the dependencies:
+
+```console
+$ yarn install
+```
+
+## Project Setup History
 
 These steps were followed to set up this project.
 
@@ -17,3 +25,8 @@ lerna success Initialized Lerna files
 ```
 
 3. Rename the project in `package.json` to `js`.
+4. Add example NextJs project with [Tailwind CSS](https://tailwindcss.com/)
+   [JIT](https://tailwindcss.com/docs/just-in-time-mode), [Jest](https://jestjs.io/), and
+   [Cypress](https://www.cypress.io/) support based on example files from
+   [antoniolofiego/Batteries-Included-Next.js](https://github.com/antoniolofiego/Batteries-Included-Next.js)
+   and the [NextJS Testing instructions](https://nextjs.org/docs/testing).

@@ -1,0 +1,99 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "batteries-included:build",
+      "group": "build",
+      "command": "yarn",
+      "args": ["run", "build"],
+      "options": {
+        "cwd": "${workspaceRoot}/src/js/packages/batteries-included"
+      }
+    },
+    {
+      "label": "batteries-included:css:build",
+      "group": "build",
+      "command": "yarn",
+      "args": ["run", "css:build"],
+      "options": {
+        "cwd": "${workspaceRoot}/src/js/packages/batteries-included"
+      }
+    },
+    {
+      "label": "batteries-included:jest",
+      "group": "test",
+      "dependsOn": ["batteries-included:build", "batteries-included:css:build"],
+      "command": "yarn",
+      "args": ["run", "jest"],
+      "options": {
+        "cwd": "${workspaceRoot}/src/js/packages/batteries-included"
+      }
+    },
+    {
+      "label": "batteries-included:e2e:headless",
+      "group": "test",
+      "dependsOn": ["batteries-included:build", "batteries-included:css:build"],
+      "command": "bash",
+      // Remove DISPLAY, see https://github.com/cypress-io/cypress/issues/17849.
+      // However, if using VS Code with SSH remote, then there may be an issue with X11 forwarding
+      // which can be verified by trying to run a command like `xeyes` in the VS Code terminal.
+      // In that case, run `Remote SSH: Kill the VS Code Server on Host` to completely
+      // establish a new connection.
+      "args": ["-c", "unset DISPLAY; yarn run e2e:headless"],
+      "options": {
+        "cwd": "${workspaceRoot}/src/js/packages/batteries-included",
+        "env": {}
+      }
+    },
+    {
+      "label": "batteries-included:test-all",
+      "dependsOn": ["batteries-included:build", "batteries-included:css:build"],
+      "command": "bash",
+      // Remove DISPLAY, see https://github.com/cypress-io/cypress/issues/17849.
+      // However, if using VS Code with SSH remote, then there may be an issue with X11 forwarding
+      // which can be verified by trying to run a command like `xeyes` in the VS Code terminal.
+      // In that case, run `Remote SSH: Kill the VS Code Server on Host` to completely
+      // establish a new connection.
+      "args": ["-c", "unset DISPLAY; yarn run jest && yarn run e2e:headless"],
+      "options": {
+        "cwd": "${workspaceRoot}/src/js/packages/batteries-included"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "batteries-included:css:build",
+      "command": "yarn",
+      "args": ["run", "css:build"],
+      "options": {
+        "cwd": "${workspaceRoot}/src/js/packages/batteries-included"
+      }
+    },
+    {
+      "label": "batteries-included:css:build-and-watch",
+      "dependsOn": ["batteries-included:css:build"],
+      "command": "yarn",
+      "args": ["run", "css:watch"],
+      "options": {
+        "cwd": "${workspaceRoot}/src/js/packages/batteries-included"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "css",
+        "fileLocation": "absolute",
+        "pattern": {
+          "regexp": "^(\\w+): (.+):(\\d+):(\\d+): (.+)$",
+          "code": 1,
+          "file": 2,
+          "line": 3,
+          "column": 4,
+          "message": 5
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".",
+          "endsPattern": "."
+        }
+      }
+    }
+  ]
+}
