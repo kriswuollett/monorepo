@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "batteries-included:css:build",
+      "command": "yarn",
+      "args": ["run", "css:build"]
+    },
+    {
+      "label": "batteries-included:css:build-and-watch",
+      // Make sure generated css is built before running the watch background task.
+      "dependsOn": ["batteries-included:css:build"],
+      "command": "yarn",
+      "args": ["run", "css:watch"],
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "css",
+        "fileLocation": "absolute",
+        "pattern": {
+          "regexp": "^(\\w+): (.+):(\\d+):(\\d+): (.+)$",
+          "code": 1,
+          "file": 2,
+          "line": 3,
+          "column": 4,
+          "message": 5
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".",
+          "endsPattern": "."
+        }
+      }
+    }
+  ]
+}
