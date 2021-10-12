@@ -5,18 +5,18 @@
       "label": "batteries-included:build",
       "group": "build",
       "command": "yarn",
-      "args": ["run", "build"],
+      "args": ["workspace", "batteries-included", "run", "build"],
       "options": {
-        "cwd": "${workspaceRoot}/src/js/packages/batteries-included"
+        "cwd": "${workspaceRoot}/src/js"
       }
     },
     {
       "label": "batteries-included:css:build",
       "group": "build",
       "command": "yarn",
-      "args": ["run", "css:build"],
+      "args": ["workspace", "batteries-included", "run", "css:build"],
       "options": {
-        "cwd": "${workspaceRoot}/src/js/packages/batteries-included"
+        "cwd": "${workspaceRoot}/src/js"
       }
     },
     {
@@ -24,9 +24,9 @@
       "group": "test",
       "dependsOn": ["batteries-included:build", "batteries-included:css:build"],
       "command": "yarn",
-      "args": ["run", "jest"],
+      "args": ["workspace", "batteries-included", "run", "jest"],
       "options": {
-        "cwd": "${workspaceRoot}/src/js/packages/batteries-included"
+        "cwd": "${workspaceRoot}/src/js"
       }
     },
     {
@@ -39,10 +39,12 @@
       // which can be verified by trying to run a command like `xeyes` in the VS Code terminal.
       // In that case, run `Remote SSH: Kill the VS Code Server on Host` to completely
       // establish a new connection.
-      "args": ["-c", "unset DISPLAY; yarn run e2e:headless"],
+      "args": [
+        "-c",
+        "unset DISPLAY; yarn workspace batteries-included run e2e:headless"
+      ],
       "options": {
-        "cwd": "${workspaceRoot}/src/js/packages/batteries-included",
-        "env": {}
+        "cwd": "${workspaceRoot}/src/js"
       }
     },
     {
@@ -54,11 +56,13 @@
       // which can be verified by trying to run a command like `xeyes` in the VS Code terminal.
       // In that case, run `Remote SSH: Kill the VS Code Server on Host` to completely
       // establish a new connection.
-      "args": ["-c", "unset DISPLAY; yarn run jest && yarn run e2e:headless"],
+      "args": [
+        "-c",
+        "unset DISPLAY; yarn workspace batteries-included run jest && yarn workspace batteries-included run e2e:headless"
+      ],
       "options": {
-        "cwd": "${workspaceRoot}/src/js/packages/batteries-included"
-      },
-      "problemMatcher": []
+        "cwd": "${workspaceRoot}/src/js"
+      }
     },
     {
       "label": "batteries-included:css:build",
