@@ -8,12 +8,15 @@
       "name": "batteries-included: debug server-side",
       "type": "node-terminal",
       "request": "launch",
-      "cwd": "${workspaceFolder}/src/js/packages/batteries-included",
-      "localRoot": "${workspaceFolder}/src/js/packages/batteries-included",
+      "cwd": "${workspaceFolder}/src/js",
+      "localRoot": "${workspaceFolder}/src/js",
       // Precompile CSS and use next_dev since running dev shell script from this directory fails.
       "preLaunchTask": "batteries-included:css:build-and-watch",
       "command": "yarn workspace batteries-included run next_dev",
-      "trace": true
+      "trace": true,
+      "sourceMapPathOverrides": {
+        "webpack://?:*/*": "${workspaceFolder}/src/js/packages/batteries-included/*"
+      }
     },
     {
       "name": "batteries-included: debug client-side",

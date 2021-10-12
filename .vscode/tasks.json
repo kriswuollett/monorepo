@@ -63,18 +63,18 @@
     {
       "label": "batteries-included:css:build",
       "command": "yarn",
-      "args": ["run", "css:build"],
+      "args": ["workspace", "batteries-included", "run", "css:build"],
       "options": {
-        "cwd": "${workspaceRoot}/src/js/packages/batteries-included"
+        "cwd": "${workspaceRoot}/src/js"
       }
     },
     {
       "label": "batteries-included:css:build-and-watch",
       "dependsOn": ["batteries-included:css:build"],
       "command": "yarn",
-      "args": ["run", "css:watch"],
+      "args": ["workspace", "batteries-included", "run", "css:watch"],
       "options": {
-        "cwd": "${workspaceRoot}/src/js/packages/batteries-included"
+        "cwd": "${workspaceRoot}/src/js"
       },
       "isBackground": true,
       "problemMatcher": {
